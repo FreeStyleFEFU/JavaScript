@@ -1,0 +1,43 @@
+body
+{
+	background-color:#F0FFF0;
+}
+p
+{    
+	font-family: Times new roman; /* Гарнитура шрифта */ 
+    font-size: 140%; /* Размер текста */ 
+    font-weight: bold; /* Светлое начертание */ 
+	
+}
+.question
+{
+	width: 700px;
+	height: 350px; 
+	background-color:#D3D3D3;
+}
+.miniimage
+{
+	width: 220px;
+	height: 180px; 
+	margin: 10px 10px 10px 10px;
+    display: inline-block;
+}
+.question1
+{
+	width: 700px;
+	height: 400px; 
+	background-color:#D3D3D3;
+}
+.miniimage1
+{
+	width: 350px;
+	height: 250px; 
+	margin: 10px 10px 10px 10px;
+    display: inline-block;
+}
+
+.b1 {
+    background: navy; /* Синий цвет фона */ 
+    color: white; /* Белые буквы */ 
+    font-size: 9pt; /* Размер шрифта в пунктах */
+   }
