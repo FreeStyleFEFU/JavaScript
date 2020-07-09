@@ -1,0 +1,47 @@
+body
+{
+    background: url(1.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+#main
+{
+	width: 1000px;
+    margin: auto;
+}
+.t3d{
+    width: 150px;
+    height: 200px;
+    margin: 10px 10px 10px 10px;
+    display: inline-block;
+}
+/*.rotate:active
+{
+	transform:rotateY(180deg);
+}*/
+.rotate{
+
+    position: relative;
+    transition: 0.5s;
+    transform-style: preserve-3d;
+}
+
+.oncard{
+    height: 200px;
+    width: 150px;
+    transform: rotateY(180deg);
+}
+
+.bimg2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+}
+
+/*img, .bimg2{
+    width:  150px;
+    height: 200px;
+
+    
+}
+
