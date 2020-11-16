@@ -1,0 +1,134 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+  <!-- Add your site or application content here -->
+  <p id="re">Hello world! This is HTML5 Boilerplate.</p>
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+document.body.style.margin = '10%';
+
+async function fetchJSON(url){
+    response = await fetch(url, {
+        json: true,
+        method: 'GET'
+      })
+    data = await response.json()
+    return data
+
+}
+
+async function RenderDetails(prom){
+    prom.then(function (data){
+        document.body.innerHTML = "";
+        for (var i in data){
+            p = document.createElement('p');
+            document.body.appendChild(p);
+            p.innerHTML = i +': ' +data[i];
+        }
+            input = document.createElement('button');
+            input.style.height = "50px";
+            input.style.width = "200px";
+            input.innerText = "BACK";
+            input.onclick = function() {RenderList(fetchJSON('http://127.0.0.1:8000/posts/'))};
+            document.body.appendChild(input);
+//         for (var i=0;i<data['results'].length;i++){
+//             link.push(data['results'][i]['url']);
+//         }
+    })
+}
+
+async function RenderList(prom){
+    prom.then(function (data){
+        link = data['next'];
+        back = data['previous'];
+
+        document.body.innerHTML = "";
+        for (var i = 0; i< data['results'].length; i++){
+            let post = document.createElement('div');
+            document.body.appendChild(post);
+            console.log(data['results'][i]);
+            post.id = data['results'][i]['url'];
+            post.onclick = function(){RenderDetails(fetchJSON(post.id));}
+            for(var j in data['results'][i]){
+                p = document.createElement('p');
+                post.appendChild(p);
+                p.innerHTML = j+" : "+data['results'][i][j];
+                //console.log(j+" : "+data['results'][i][j]);
+
+            }
+            hr = document.createElement('hr');
+            post.appendChild(hr);
+            hr = document.createElement('hr');
+            post.appendChild(hr);
+        }
+                if (back != null) {
+            input = document.createElement('button');
+            input.style.height = "50px";
+            input.style.width = "200px";
+            input.innerText = "BACK";
+            document.body.appendChild(input);
+            input.onclick = function(){
+                //body = getElementByName('body');
+                document.body.innerHTML = "";
+                RenderList(fetchJSON(back));
+            };
+        }
+        //console.log(link);
+        if(link != null){
+            input = document.createElement('button');
+            input.style.height = "50px";
+            input.style.width = "200px";
+            input.innerText = "NEXT";
+            document.body.appendChild(input);
+            input.onclick = function(){
+                //body = getElementByName('body');
+                document.body.innerHTML = "";
+                RenderList(fetchJSON(link));
+            };
+
+        }
+
+
+    })
+
+    }
+
+//document.body.addEventListener('click',function(event) {
+//    if (event.target)
+//}
+RenderList(fetchJSON('/posts/'));
+//RenderDetails(fetchJSON('http://127.0.0.1:8000/posts/1'));
+
+
+  </script>
+
+</body>
+
+</html>
